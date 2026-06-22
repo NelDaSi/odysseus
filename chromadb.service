@@ -1,0 +1,15 @@
+[Unit]
+Description=ChromaDB (vector store for Odysseus tool index + RAG)
+After=network.target
+Before=odysseus.service
+
+[Service]
+Type=simple
+User=sbox
+WorkingDirectory=/var/www/apps/odysseus
+ExecStart=/home/sbox/odysseus/.venv/bin/chroma run --path /var/www/apps/odysseus/data/chroma --host 127.0.0.1 --port 8100
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
